@@ -31,7 +31,7 @@ public class AuthController {
         String token = authService.login(loginRequestDto);
         LoginResponseDto loginResponseDto = new LoginResponseDto();
         loginResponseDto.setToken(token);
-        loginResponseDto.setUserId(-1);
+        loginResponseDto.setUserId(-1l);
         return ResponseEntity.ok(loginResponseDto);
     }
 }
