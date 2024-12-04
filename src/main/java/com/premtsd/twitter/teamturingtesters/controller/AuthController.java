@@ -5,6 +5,7 @@ import com.premtsd.twitter.teamturingtesters.dto.LoginResponseDto;
 import com.premtsd.twitter.teamturingtesters.dto.SignupRequestDto;
 import com.premtsd.twitter.teamturingtesters.dto.UserDto;
 import com.premtsd.twitter.teamturingtesters.service.AuthService;
+import com.premtsd.twitter.teamturingtesters.service.JwtService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -19,6 +20,7 @@ import org.springframework.web.bind.annotation.RestController;
 public class AuthController {
 
     private final AuthService authService;
+    private final JwtService jwtService;
 
     @PostMapping("/signup")
     public ResponseEntity<UserDto> signUp(@RequestBody SignupRequestDto signupRequestDto) {
@@ -31,7 +33,7 @@ public class AuthController {
         String token = authService.login(loginRequestDto);
         LoginResponseDto loginResponseDto = new LoginResponseDto();
         loginResponseDto.setToken(token);
-        loginResponseDto.setUserId(-1l);
+        loginResponseDto.setUserId(jwtService.getUserIdFromToken(token));
         return ResponseEntity.ok(loginResponseDto);
     }
 }
