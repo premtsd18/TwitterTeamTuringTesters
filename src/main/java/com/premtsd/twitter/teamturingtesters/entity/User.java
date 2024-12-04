@@ -37,6 +37,5 @@ public class User {
     private Set<Role> roles;
 
     @OneToMany
-    @JsonManagedReference
     private Set<Post> postList;
 }

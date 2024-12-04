@@ -29,6 +29,7 @@ public class PostsService {
         post.setUserId(userId);
         post.setCreatedAt(new Date());
 
+        post.setId(null);
         Post savedPost = postsRepository.save(post);
         return modelMapper.map(savedPost, PostDto.class);
     }
