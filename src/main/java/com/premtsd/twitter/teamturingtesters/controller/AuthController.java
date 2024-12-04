@@ -1,6 +1,7 @@
 package com.premtsd.twitter.teamturingtesters.controller;
 
 import com.premtsd.twitter.teamturingtesters.dto.LoginRequestDto;
+import com.premtsd.twitter.teamturingtesters.dto.LoginResponseDto;
 import com.premtsd.twitter.teamturingtesters.dto.SignupRequestDto;
 import com.premtsd.twitter.teamturingtesters.dto.UserDto;
 import com.premtsd.twitter.teamturingtesters.service.AuthService;
@@ -26,8 +27,11 @@ public class AuthController {
     }
 
     @PostMapping("/login")
-    public ResponseEntity<String> login(@RequestBody LoginRequestDto loginRequestDto) {
+    public ResponseEntity<LoginResponseDto> login(@RequestBody LoginRequestDto loginRequestDto) {
         String token = authService.login(loginRequestDto);
-        return ResponseEntity.ok(token);
+        LoginResponseDto loginResponseDto = new LoginResponseDto();
+        loginResponseDto.setToken(token);
+        loginResponseDto.setUserId(-1);
+        return ResponseEntity.ok(loginResponseDto);
     }
 }
