@@ -44,7 +44,7 @@ public class PostsService {
 //        TODO send Notifications to all connections
 
         Post post = postsRepository.findById(postId).orElseThrow(() ->
-                new ResourceNotFoundException("Post not found with id: "+postId));
+                new ResourceNotFoundException(" Post not found withid: "+postId));
         return modelMapper.map(post, PostDto.class);
     }
 

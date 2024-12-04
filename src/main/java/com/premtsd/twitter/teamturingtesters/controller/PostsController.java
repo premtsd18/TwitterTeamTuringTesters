@@ -4,7 +4,6 @@ package com.premtsd.twitter.teamturingtesters.controller;
 import com.premtsd.twitter.teamturingtesters.dto.PostCreateRequestDto;
 import com.premtsd.twitter.teamturingtesters.dto.PostDto;
 import com.premtsd.twitter.teamturingtesters.service.PostsService;
-import jakarta.servlet.http.HttpServletRequest;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;

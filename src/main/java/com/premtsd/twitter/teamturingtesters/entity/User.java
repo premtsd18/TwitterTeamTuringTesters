@@ -27,6 +27,8 @@ public class User {
     @Column(nullable = false)
     private String password;
 
+    private String profileBio;
+
     @ManyToMany(fetch = FetchType.EAGER)
     @JoinTable(
             name = "users_roles",
@@ -38,4 +40,12 @@ public class User {
 
     @OneToMany
     private Set<Post> postList;
+
+    @OneToMany
+    @JoinTable(
+            name = "user_followers",
+            joinColumns = @JoinColumn(name = "user_id"),
+            inverseJoinColumns = @JoinColumn(name = "follower_id")
+    )
+    private Set<User> followerList;
 }
