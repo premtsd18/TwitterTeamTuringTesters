@@ -2,6 +2,8 @@ package com.premtsd.twitter.teamturingtesters.dto;
 
 import lombok.Data;
 
+import java.util.Set;
+
 @Data
 public class LoginResponseDto {
     private String token;
@@ -9,4 +11,5 @@ public class LoginResponseDto {
     private String name;
     private String email;
     private String profileBio;
+//    private Set<UserDto> followerList;
 }

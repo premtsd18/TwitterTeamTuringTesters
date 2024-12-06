@@ -1,10 +1,7 @@
 package com.premtsd.twitter.teamturingtesters.service;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.premtsd.twitter.teamturingtesters.dto.LoginRequestDto;
-import com.premtsd.twitter.teamturingtesters.dto.SendEmailEventDto;
-import com.premtsd.twitter.teamturingtesters.dto.SignupRequestDto;
-import com.premtsd.twitter.teamturingtesters.dto.UserDto;
+import com.premtsd.twitter.teamturingtesters.dto.*;
 import com.premtsd.twitter.teamturingtesters.entity.Role;
 import com.premtsd.twitter.teamturingtesters.entity.User;
 import com.premtsd.twitter.teamturingtesters.exception.BadRequestException;
@@ -106,8 +103,14 @@ public class AuthService {
         userDto.setName(user.getName());
         userDto.setEmail(user.getEmail());
         userDto.setRoles(roleNames);
+//        userDto.setFollowerList(new HashSet<>());
+//        for(User user1:user.getFollowerList()) {
+//            userDto.getFollowerList().add(mapUserToUserDto(user1));
+//        }
 
         return userDto;
     }
+
+
 }
 
