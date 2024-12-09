@@ -1,14 +1,18 @@
 package com.premtsd.twitter.teamturingtesters.controller;
 
 
+import com.premtsd.twitter.teamturingtesters.dto.ConnectionFollowerResponseDto;
 import com.premtsd.twitter.teamturingtesters.dto.PostCreateRequestDto;
 import com.premtsd.twitter.teamturingtesters.dto.PostDto;
+import com.premtsd.twitter.teamturingtesters.service.ConnectionService;
+import com.premtsd.twitter.teamturingtesters.service.NotificationService;
 import com.premtsd.twitter.teamturingtesters.service.PostsService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @RestController
@@ -17,11 +21,25 @@ import java.util.List;
 public class PostsController {
 
     private final PostsService postsService;
+    private final ConnectionService connectionService;
+    private final NotificationService notificationService;
 
     @PostMapping
     public ResponseEntity<PostDto> createPost(@RequestBody PostCreateRequestDto postDto) {
         PostDto createdPost;
             createdPost = postsService.createPost(postDto, postDto.getUserId());
+
+        ArrayList<ConnectionFollowerResponseDto> connectionFollowersList = (ArrayList<ConnectionFollowerResponseDto>) connectionService.getFollowerPost(postDto.getUserId());
+
+        ArrayList<Long> followerUserIdList= new ArrayList<>();
+
+        for (ConnectionFollowerResponseDto connectionFollowerResponseDto : connectionFollowersList) {
+            followerUserIdList.add(connectionFollowerResponseDto.getUser().getId());
+        }
+        // Create a notification message
+        String notification = "User " + postDto.getUserId() + " posted: " + postDto.getContent();
+        // Notify all followers
+        notificationService.sendNotificationToFollowers(followerUserIdList, notification);
 
         return new ResponseEntity<>(createdPost, HttpStatus.CREATED);
     }
