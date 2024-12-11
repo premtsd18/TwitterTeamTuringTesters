@@ -25,5 +25,5 @@ public class Post {
     @Column(nullable = false)
     private Long userId;
 
-    private Date createdAt;
+    private LocalDateTime createdAt;
 }

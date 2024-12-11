@@ -17,17 +17,15 @@ import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor
-@Slf4j
 public class PostsService {
 
     private final PostsRepository postsRepository;
     private final ModelMapper modelMapper;
-//    private final ConnectionsClient connectionsClient;
 
     public PostDto createPost(PostCreateRequestDto postDto, Long userId) {
         Post post = modelMapper.map(postDto, Post.class);
         post.setUserId(userId);
-        post.setCreatedAt(new Date());
+        post.setCreatedAt(LocalDateTime.now());
 
         post.setId(null);
         Post savedPost = postsRepository.save(post);
@@ -35,7 +33,7 @@ public class PostsService {
     }
 
     public PostDto getPostById(Long postId) {
-        log.debug("Retrieving post with ID: {}", postId);
+//        log.debug("Retrieving post with ID: {}", postId);
 
 //        Long userId = UserContextHolder.getCurrentUserId();
 

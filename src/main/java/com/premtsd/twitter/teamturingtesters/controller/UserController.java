@@ -17,7 +17,7 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 @RequestMapping("/auth")
 @RequiredArgsConstructor
-public class AuthController {
+public class UserController {
 
     private final AuthService authService;
     private final JwtService jwtService;
@@ -30,10 +30,7 @@ public class AuthController {
 
     @PostMapping("/login")
     public ResponseEntity<LoginResponseDto> login(@RequestBody LoginRequestDto loginRequestDto) {
-        String token = authService.login(loginRequestDto);
-        LoginResponseDto loginResponseDto = new LoginResponseDto();
-        loginResponseDto.setToken(token);
-        loginResponseDto.setUserId(jwtService.getUserIdFromToken(token));
+        LoginResponseDto loginResponseDto = authService.login(loginRequestDto);
         return ResponseEntity.ok(loginResponseDto);
     }
 }

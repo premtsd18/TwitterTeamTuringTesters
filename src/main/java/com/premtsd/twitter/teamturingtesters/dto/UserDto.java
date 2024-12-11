@@ -1,6 +1,5 @@
 package com.premtsd.twitter.teamturingtesters.dto;
 
-import com.premtsd.twitter.teamturingtesters.entity.User;
 import lombok.Data;
 
 import java.util.List;

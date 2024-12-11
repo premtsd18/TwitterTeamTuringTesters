@@ -78,7 +78,7 @@ public class AuthService {
         return mapUserToUserDto(savedUser);
     }
 
-    public String login(LoginRequestDto loginRequestDto) {
+    public LoginResponseDto login(LoginRequestDto loginRequestDto) {
         User user = userRepository.findByEmail(loginRequestDto.getEmail())
                 .orElseThrow(() -> new ResourceNotFoundException("User not found with email: "+loginRequestDto.getEmail()));
 
@@ -88,7 +88,17 @@ public class AuthService {
             throw new BadRequestException("Incorrect password");
         }
 
-        return jwtService.generateAccessToken(user);
+        LoginResponseDto loginResponseDto = new LoginResponseDto();
+        loginResponseDto.setToken(jwtService.generateAccessToken(user));
+        loginResponseDto.setUserId(jwtService.getUserIdFromToken(loginResponseDto.getToken()));
+        Optional<User> userOptional=userRepository.findUserById(loginResponseDto.getUserId());
+        if(!userOptional.isPresent()) {
+            throw new ResourceNotFoundException("User not found with id: "+loginResponseDto.getUserId());
+        }
+        loginResponseDto.setName(userOptional.get().getName());
+        loginResponseDto.setEmail(userOptional.get().getEmail());
+        loginResponseDto.setProfileBio("Team Turing Testers !!");
+        return loginResponseDto;
     }
 
     private UserDto mapUserToUserDto(User user) {
