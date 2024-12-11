@@ -20,6 +20,8 @@ public class NotificationService {
     // Send notification to multiple users (followers)
     public void sendNotificationToFollowers(ArrayList<Long> followerIdList, String message) {
         for (Long followerId : followerIdList) {
+            System.out.println(followerId);
+            System.out.println("Message wsssss: " + message);
             sendNotificationToUser(followerId, message);
         }
     }
