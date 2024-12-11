@@ -8,6 +8,7 @@ import com.premtsd.twitter.teamturingtesters.exception.BadRequestException;
 import com.premtsd.twitter.teamturingtesters.exception.ResourceNotFoundException;
 import com.premtsd.twitter.teamturingtesters.repository.RoleRepository;
 import com.premtsd.twitter.teamturingtesters.repository.UserRepository;
+import com.premtsd.twitter.teamturingtesters.repository.UserWithFollowerCountsProjection;
 import com.premtsd.twitter.teamturingtesters.utils.PasswordUtil;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -79,27 +80,38 @@ public class AuthService {
     }
 
     public LoginResponseDto login(LoginRequestDto loginRequestDto) {
+        // Fetch user by email
         User user = userRepository.findByEmail(loginRequestDto.getEmail())
-                .orElseThrow(() -> new ResourceNotFoundException("User not found with email: "+loginRequestDto.getEmail()));
+                .orElseThrow(() -> new ResourceNotFoundException("User not found with email: " + loginRequestDto.getEmail()));
 
+        // Check password
         boolean isPasswordMatch = PasswordUtil.checkPassword(loginRequestDto.getPassword(), user.getPassword());
-
-        if(!isPasswordMatch) {
+        if (!isPasswordMatch) {
             throw new BadRequestException("Incorrect password");
         }
 
+        // Generate token
+        String token = jwtService.generateAccessToken(user);
+        Long userId = jwtService.getUserIdFromToken(token);
+
+        // Fetch user with follower counts using projection
+        UserWithFollowerCountsProjection userProjection = userRepository.findUserWithFollowerCounts(userId)
+                .orElseThrow(() -> new ResourceNotFoundException("User not found with id: " + userId));
+
+        // Build the LoginResponseDto
         LoginResponseDto loginResponseDto = new LoginResponseDto();
-        loginResponseDto.setToken(jwtService.generateAccessToken(user));
-        loginResponseDto.setUserId(jwtService.getUserIdFromToken(loginResponseDto.getToken()));
-        Optional<User> userOptional=userRepository.findUserById(loginResponseDto.getUserId());
-        if(!userOptional.isPresent()) {
-            throw new ResourceNotFoundException("User not found with id: "+loginResponseDto.getUserId());
-        }
-        loginResponseDto.setName(userOptional.get().getName());
-        loginResponseDto.setEmail(userOptional.get().getEmail());
-        loginResponseDto.setProfileBio("Team Turing Testers !!");
+        loginResponseDto.setToken(token);
+        loginResponseDto.setUserId(userProjection.getId());
+        loginResponseDto.setName(userProjection.getName());
+        loginResponseDto.setEmail(userProjection.getEmail());
+        loginResponseDto.setProfileBio(userProjection.getProfileBio());
+        loginResponseDto.setFollowersCount(userProjection.getFollowersCount());
+        loginResponseDto.setFollowingCount(userProjection.getFollowingCount());
+
         return loginResponseDto;
     }
+
+
 
     private UserDto mapUserToUserDto(User user) {
         // Convert Set<Role> to List<String> of role names

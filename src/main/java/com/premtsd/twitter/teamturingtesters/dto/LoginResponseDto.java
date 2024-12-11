@@ -11,5 +11,6 @@ public class LoginResponseDto {
     private String name;
     private String email;
     private String profileBio;
-//    private Set<UserDto> followerList;
+    private Long followingCount;
+    private Long followersCount;
 }
