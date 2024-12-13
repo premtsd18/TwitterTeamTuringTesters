@@ -9,16 +9,14 @@ import com.premtsd.twitter.teamturingtesters.entity.User;
 import com.premtsd.twitter.teamturingtesters.exception.ResourceNotFoundException;
 import com.premtsd.twitter.teamturingtesters.repository.PostsRepository;
 import com.premtsd.twitter.teamturingtesters.repository.UserRepository;
-import com.premtsd.twitter.teamturingtesters.utils.Observer;
-import com.premtsd.twitter.teamturingtesters.utils.ObserverManager;
+import com.premtsd.twitter.teamturingtesters.utils.observerPattern.Observer;
+import com.premtsd.twitter.teamturingtesters.utils.observerPattern.ObserverManager;
 import lombok.RequiredArgsConstructor;
-import lombok.extern.slf4j.Slf4j;
 import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;

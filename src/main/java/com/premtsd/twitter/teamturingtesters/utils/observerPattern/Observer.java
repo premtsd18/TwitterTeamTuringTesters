@@ -1,7 +1,6 @@
-package com.premtsd.twitter.teamturingtesters.utils;
+package com.premtsd.twitter.teamturingtesters.utils.observerPattern;
 
 import com.premtsd.twitter.teamturingtesters.dto.UserDto;
-import com.premtsd.twitter.teamturingtesters.entity.User;
 
 
 public interface Observer {
