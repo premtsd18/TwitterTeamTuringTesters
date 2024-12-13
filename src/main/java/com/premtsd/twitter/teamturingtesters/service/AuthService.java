@@ -64,7 +64,7 @@ public class AuthService {
         if(savedUser != null) {
             SendEmailEventDto sendEmailEventDto=new SendEmailEventDto();
             sendEmailEventDto.setTo(savedUser.getEmail());
-            sendEmailEventDto.setSubject("Your account has been created at LinkedIn-Like");
+            sendEmailEventDto.setSubject("Your account has been created at TuringX");
             sendEmailEventDto.setBody("Hi "+savedUser.getName()+",\n"+" Thanks for signing up");
             streamingMessageSender.sendMessage(sendEmailEventDto);
         }
