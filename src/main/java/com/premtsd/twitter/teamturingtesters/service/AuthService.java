@@ -115,21 +115,28 @@ public class AuthService {
 
 
     private UserDto mapUserToUserDto(User user) {
-        // Convert Set<Role> to List<String> of role names
+        // Map roles to role names
         List<String> roleNames = user.getRoles().stream()
-                .map(role -> role.getName())  // Convert Role to String (role name)
+                .map(Role::getName)
                 .collect(Collectors.toList());
 
-        // Map the rest of the User properties to UserDto
+        // Create UserDto and map basic user information
         UserDto userDto = new UserDto();
         userDto.setId(user.getId());
         userDto.setName(user.getName());
         userDto.setEmail(user.getEmail());
         userDto.setRoles(roleNames);
-//        userDto.setFollowerList(new HashSet<>());
-//        for(User user1:user.getFollowerList()) {
-//            userDto.getFollowerList().add(mapUserToUserDto(user1));
-//        }
+
+        // Map only the first level of followers
+        userDto.setFollowerList(user.getFollowerList().stream()
+                .map(follower -> {
+                    UserDto followerDto = new UserDto();
+                    followerDto.setId(follower.getId());
+                    followerDto.setName(follower.getName());
+                    followerDto.setEmail(follower.getEmail());
+                    return followerDto;
+                })
+                .collect(Collectors.toSet()));
 
         return userDto;
     }
