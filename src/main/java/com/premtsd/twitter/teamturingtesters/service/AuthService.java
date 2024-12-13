@@ -10,9 +10,11 @@ import com.premtsd.twitter.teamturingtesters.repository.RoleRepository;
 import com.premtsd.twitter.teamturingtesters.repository.UserRepository;
 import com.premtsd.twitter.teamturingtesters.repository.UserWithFollowerCountsProjection;
 import com.premtsd.twitter.teamturingtesters.utils.PasswordUtil;
+import com.premtsd.twitter.teamturingtesters.utils.StreamingMessageSender;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.modelmapper.ModelMapper;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.kafka.core.KafkaTemplate;
 import org.springframework.stereotype.Service;
 
@@ -24,12 +26,14 @@ import java.util.stream.Collectors;
 @Slf4j
 public class AuthService {
 
-    private final KafkaTemplate<String, String> kafkaTemplate;
     private final UserRepository userRepository;
     private final ModelMapper modelMapper;
     private final JwtService jwtService;
     private final RoleRepository roleRepository;
     private final ObjectMapper objectMapper;
+
+    @Autowired
+    private StreamingMessageSender streamingMessageSender;
 
 
     public UserDto signUp(SignupRequestDto signupRequestDto) {
@@ -62,20 +66,7 @@ public class AuthService {
             sendEmailEventDto.setTo(savedUser.getEmail());
             sendEmailEventDto.setSubject("Your account has been created at LinkedIn-Like");
             sendEmailEventDto.setBody("Hi "+savedUser.getName()+",\n"+" Thanks for signing up");
-            String str="";
-            try {
-                 str = objectMapper.writeValueAsString(sendEmailEventDto);
-            }catch (Exception e){
-                System.out.println("Error in json serialization");
-            }
-
-            System.out.println(str);
-            kafkaTemplate.send("topic1", str);
-            try {
-                SendEmailEventDto event = objectMapper.readValue(str, SendEmailEventDto.class);
-            }catch (Exception e){
-                System.out.println("Error in json deserialization");
-            }
+            streamingMessageSender.sendMessage(sendEmailEventDto);
         }
         return mapUserToUserDto(savedUser);
     }
