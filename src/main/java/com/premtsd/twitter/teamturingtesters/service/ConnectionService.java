@@ -61,6 +61,7 @@ public class ConnectionService {
 
     private ArrayList<ConnectionFollowerResponseDto> mapFollowerAndPosts(User currUser){
         ArrayList<ConnectionFollowerResponseDto> connectionFollowerResponseDtoList= new ArrayList<>();
+        System.out.println(currUser);
         for(User user: currUser.getFollowerList()){
             ConnectionFollowerResponseDto connectionFollowerResponseDto = new ConnectionFollowerResponseDto();
 //            System.out.println(user.getClass());

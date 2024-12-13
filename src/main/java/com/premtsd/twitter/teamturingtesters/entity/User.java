@@ -41,7 +41,7 @@ public class User {
     @OneToMany
     private Set<Post> postList;
 
-    @OneToMany
+    @ManyToMany
     @JoinTable(
             name = "user_followers",
             joinColumns = @JoinColumn(name = "user_id"),

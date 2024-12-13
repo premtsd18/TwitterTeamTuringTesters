@@ -46,7 +46,6 @@ public class NotificationService {
                 .collect(Collectors.toList()); // Collect the filtered results into a List
         for(Notification notification:notificationList){
             notification.setSent(true);
-            notification.getUser().setFollowerList(null);
             Notification savedNotification = notificationRepository.save(notification);
         }
         return notificationList;
