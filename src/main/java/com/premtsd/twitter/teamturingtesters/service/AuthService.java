@@ -31,6 +31,7 @@ public class AuthService {
     private final RoleRepository roleRepository;
     private final ObjectMapper objectMapper;
 
+
     public UserDto signUp(SignupRequestDto signupRequestDto) {
         boolean exists = userRepository.existsByEmail(signupRequestDto.getEmail());
         if(exists) {
@@ -133,6 +134,9 @@ public class AuthService {
         return userDto;
     }
 
+    public List<UserDto> getAllUsers(){
+        return userRepository.findAll().stream().map(user -> mapUserToUserDto(user)).collect(Collectors.toList());
+    }
 
 }
 

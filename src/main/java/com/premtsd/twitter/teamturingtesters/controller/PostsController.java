@@ -4,6 +4,7 @@ package com.premtsd.twitter.teamturingtesters.controller;
 import com.premtsd.twitter.teamturingtesters.dto.ConnectionFollowerResponseDto;
 import com.premtsd.twitter.teamturingtesters.dto.PostCreateRequestDto;
 import com.premtsd.twitter.teamturingtesters.dto.PostDto;
+import com.premtsd.twitter.teamturingtesters.entity.Notification;
 import com.premtsd.twitter.teamturingtesters.service.ConnectionService;
 import com.premtsd.twitter.teamturingtesters.service.NotificationService;
 import com.premtsd.twitter.teamturingtesters.service.PostsService;
@@ -29,17 +30,7 @@ public class PostsController {
         PostDto createdPost;
             createdPost = postsService.createPost(postDto, postDto.getUserId());
 
-        ArrayList<ConnectionFollowerResponseDto> connectionFollowersList = (ArrayList<ConnectionFollowerResponseDto>) connectionService.getFollowerPost(postDto.getUserId());
 
-        ArrayList<Long> followerUserIdList= new ArrayList<>();
-
-        for (ConnectionFollowerResponseDto connectionFollowerResponseDto : connectionFollowersList) {
-            followerUserIdList.add(connectionFollowerResponseDto.getUser().getId());
-        }
-        // Create a notification message
-        String notification = "User " + postDto.getUserId() + " posted: " + postDto.getContent();
-        // Notify all followers
-        notificationService.sendNotificationToFollowers(followerUserIdList, notification);
 
         return new ResponseEntity<>(createdPost, HttpStatus.CREATED);
     }
@@ -55,5 +46,12 @@ public class PostsController {
         List<PostDto> posts = postsService.getAllPostsOfUser(userId);
         return ResponseEntity.ok(posts);
     }
+
+    @GetMapping("/users/{userId}/allNotifications")
+    public ResponseEntity<List<Notification>> getAllNotificationsOfUser(@PathVariable Long userId) {
+        List<Notification> notificationList=notificationService.getAllPendingNotification(userId);
+        return ResponseEntity.ok(notificationList);
+    }
+
 
 }
