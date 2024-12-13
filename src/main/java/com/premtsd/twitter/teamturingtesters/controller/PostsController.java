@@ -5,6 +5,7 @@ import com.premtsd.twitter.teamturingtesters.dto.ConnectionFollowerResponseDto;
 import com.premtsd.twitter.teamturingtesters.dto.PostCreateRequestDto;
 import com.premtsd.twitter.teamturingtesters.dto.PostDto;
 import com.premtsd.twitter.teamturingtesters.entity.Notification;
+import com.premtsd.twitter.teamturingtesters.exception.BadRequestException;
 import com.premtsd.twitter.teamturingtesters.service.ConnectionService;
 import com.premtsd.twitter.teamturingtesters.service.NotificationService;
 import com.premtsd.twitter.teamturingtesters.service.PostsService;
@@ -27,6 +28,7 @@ public class PostsController {
 
     @PostMapping
     public ResponseEntity<PostDto> createPost(@RequestBody PostCreateRequestDto postDto) {
+        if(postDto.getContent().length()>=250) throw new BadRequestException("Content is soooo huge");
         PostDto createdPost;
             createdPost = postsService.createPost(postDto, postDto.getUserId());
 
