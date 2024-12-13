@@ -2,6 +2,7 @@ package com.premtsd.twitter.teamturingtesters.controller;
 
 
 import com.premtsd.twitter.teamturingtesters.dto.ConnectionFollowerResponseDto;
+import com.premtsd.twitter.teamturingtesters.dto.NotificationDto;
 import com.premtsd.twitter.teamturingtesters.dto.PostCreateRequestDto;
 import com.premtsd.twitter.teamturingtesters.dto.PostDto;
 import com.premtsd.twitter.teamturingtesters.entity.Notification;
@@ -50,8 +51,8 @@ public class PostsController {
     }
 
     @GetMapping("/users/{userId}/allNotifications")
-    public ResponseEntity<List<Notification>> getAllNotificationsOfUser(@PathVariable Long userId) {
-        List<Notification> notificationList=notificationService.getAllPendingNotification(userId);
+    public ResponseEntity<List<NotificationDto>> getAllNotificationsOfUser(@PathVariable Long userId) {
+        List<NotificationDto> notificationList=notificationService.getAllPendingNotification(userId);
         return ResponseEntity.ok(notificationList);
     }
 

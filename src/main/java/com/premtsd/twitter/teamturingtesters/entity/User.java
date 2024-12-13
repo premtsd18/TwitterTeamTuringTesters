@@ -41,7 +41,7 @@ public class User {
     @OneToMany
     private Set<Post> postList;
 
-    @ManyToMany
+    @ManyToMany(fetch = FetchType.LAZY)
     @JoinTable(
             name = "user_followers",
             joinColumns = @JoinColumn(name = "user_id"),
