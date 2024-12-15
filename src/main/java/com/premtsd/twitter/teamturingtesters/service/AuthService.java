@@ -10,7 +10,7 @@ import com.premtsd.twitter.teamturingtesters.repository.RoleRepository;
 import com.premtsd.twitter.teamturingtesters.repository.UserRepository;
 import com.premtsd.twitter.teamturingtesters.repository.UserWithFollowerCountsProjection;
 import com.premtsd.twitter.teamturingtesters.utils.PasswordUtil;
-import com.premtsd.twitter.teamturingtesters.utils.dependencyInversonPrinciple.StreamingMessageSender;
+import com.premtsd.twitter.teamturingtesters.service.dependencyInversonPrinciple.StreamingMessageSender;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.modelmapper.ModelMapper;

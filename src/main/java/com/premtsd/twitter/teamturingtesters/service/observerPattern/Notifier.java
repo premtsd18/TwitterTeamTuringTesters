@@ -1,4 +1,4 @@
-package com.premtsd.twitter.teamturingtesters.utils.observerPattern;
+package com.premtsd.twitter.teamturingtesters.service.observerPattern;
 
 import com.premtsd.twitter.teamturingtesters.dto.UserDto;
 

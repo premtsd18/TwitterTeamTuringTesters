@@ -1,8 +1,8 @@
-package com.premtsd.twitter.teamturingtesters.utils.observerPattern;
+package com.premtsd.twitter.teamturingtesters.service.observerPattern;
 
 import com.premtsd.twitter.teamturingtesters.dto.SendEmailEventDto;
 import com.premtsd.twitter.teamturingtesters.dto.UserDto;
-import com.premtsd.twitter.teamturingtesters.utils.dependencyInversonPrinciple.StreamingMessageSender;
+import com.premtsd.twitter.teamturingtesters.service.dependencyInversonPrinciple.StreamingMessageSender;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 

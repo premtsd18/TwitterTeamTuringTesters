@@ -1,4 +1,4 @@
-package com.premtsd.twitter.teamturingtesters.utils.dependencyInversonPrinciple;
+package com.premtsd.twitter.teamturingtesters.service.dependencyInversonPrinciple;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.premtsd.twitter.teamturingtesters.dto.SendEmailEventDto;

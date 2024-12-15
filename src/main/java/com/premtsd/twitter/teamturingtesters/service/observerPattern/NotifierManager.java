@@ -1,4 +1,4 @@
-package com.premtsd.twitter.teamturingtesters.utils.observerPattern;
+package com.premtsd.twitter.teamturingtesters.service.observerPattern;
 
 import jakarta.annotation.PostConstruct;
 import lombok.Data;
