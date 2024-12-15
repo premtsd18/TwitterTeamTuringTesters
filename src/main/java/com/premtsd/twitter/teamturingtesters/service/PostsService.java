@@ -9,8 +9,8 @@ import com.premtsd.twitter.teamturingtesters.entity.User;
 import com.premtsd.twitter.teamturingtesters.exception.ResourceNotFoundException;
 import com.premtsd.twitter.teamturingtesters.repository.PostsRepository;
 import com.premtsd.twitter.teamturingtesters.repository.UserRepository;
-import com.premtsd.twitter.teamturingtesters.utils.observerPattern.Observer;
-import com.premtsd.twitter.teamturingtesters.utils.observerPattern.ObserverManager;
+import com.premtsd.twitter.teamturingtesters.utils.observerPattern.Notifier;
+import com.premtsd.twitter.teamturingtesters.utils.observerPattern.NotifierManager;
 import lombok.RequiredArgsConstructor;
 import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
@@ -28,7 +28,7 @@ public class PostsService {
     private final PostsRepository postsRepository;
     private final ModelMapper modelMapper;
     private final UserRepository userRepository;
-    private final ObserverManager observerManager;
+    private final NotifierManager observerManager;
 
     public PostDto createPost(PostCreateRequestDto postDto, Long userId) {
         Post post = modelMapper.map(postDto, Post.class);
@@ -44,7 +44,7 @@ public class PostsService {
 
         for (ConnectionFollowerResponseDto connectionFollowerResponseDto : connectionFollowersList) {
             followerUserIdList.add(connectionFollowerResponseDto.getUser());
-            for(Observer observer:observerManager.getObservers()) {
+            for(Notifier observer:observerManager.getObservers()) {
                 observer.notify(connectionFollowerResponseDto.getUser(),notification);
             }
         }

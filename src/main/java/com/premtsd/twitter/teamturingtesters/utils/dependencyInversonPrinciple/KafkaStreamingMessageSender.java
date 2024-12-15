@@ -1,4 +1,4 @@
-package com.premtsd.twitter.teamturingtesters.utils;
+package com.premtsd.twitter.teamturingtesters.utils.dependencyInversonPrinciple;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.premtsd.twitter.teamturingtesters.dto.SendEmailEventDto;
@@ -7,7 +7,7 @@ import org.springframework.kafka.core.KafkaTemplate;
 import org.springframework.stereotype.Component;
 
 @Component
-public class KafkaStreamingMessageSender implements StreamingMessageSender{
+public class KafkaStreamingMessageSender implements StreamingMessageSender {
 
     @Autowired
     public KafkaTemplate<String, String> kafkaTemplate;

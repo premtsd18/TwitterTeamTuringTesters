@@ -6,7 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 @Component
-public class WebPageNotify implements Observer {
+public class WebPageNotify implements Notifier {
     @Autowired
     private  NotificationService notificationService;
 

@@ -1,4 +1,4 @@
-package com.premtsd.twitter.teamturingtesters.utils;
+package com.premtsd.twitter.teamturingtesters.utils.dependencyInversonPrinciple;
 
 import com.premtsd.twitter.teamturingtesters.dto.SendEmailEventDto;
 

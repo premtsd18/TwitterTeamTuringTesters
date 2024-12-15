@@ -11,14 +11,14 @@ import java.util.List;
 
 @Data
 @Component
-public class ObserverManager {
+public class NotifierManager {
     @Autowired
     private ApplicationContext applicationContext;
     @Autowired
             private EmailNotify emailNotify;
     @Autowired
             private TerminalNotify terminalNotify;
-    List<Observer> observers = new ArrayList<Observer>();
+    List<Notifier> observers = new ArrayList<Notifier>();
     @Autowired
     private WebPageNotify webPageNotify;
 
@@ -30,10 +30,10 @@ public class ObserverManager {
         addObserver(webPageNotify);
     }
 
-    public void addObserver(Observer observer) {
+    public void addObserver(Notifier observer) {
         observers.add(observer);
     }
-    public void removeObserver(Observer observer) {
+    public void removeObserver(Notifier observer) {
         observers.remove(observer);
     }
 
