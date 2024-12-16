@@ -13,8 +13,6 @@ import java.util.List;
 @Component
 public class NotifierManager {
     @Autowired
-    private ApplicationContext applicationContext;
-    @Autowired
             private EmailNotify emailNotify;
     @Autowired
             private TerminalNotify terminalNotify;

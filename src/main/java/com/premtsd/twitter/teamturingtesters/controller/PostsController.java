@@ -24,7 +24,6 @@ import java.util.List;
 public class PostsController {
 
     private final PostsService postsService;
-    private final ConnectionService connectionService;
     private final NotificationService notificationService;
 
     @PostMapping

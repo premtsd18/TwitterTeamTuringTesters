@@ -2,6 +2,7 @@ package com.premtsd.twitter.teamturingtesters.service;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.premtsd.twitter.teamturingtesters.dto.*;
+import com.premtsd.twitter.teamturingtesters.entity.Post;
 import com.premtsd.twitter.teamturingtesters.entity.Role;
 import com.premtsd.twitter.teamturingtesters.entity.User;
 import com.premtsd.twitter.teamturingtesters.exception.BadRequestException;
@@ -133,6 +134,20 @@ public class AuthService {
 
     public List<UserDto> getAllUsers(){
         return userRepository.findAll().stream().map(user -> mapUserToUserDto(user)).collect(Collectors.toList());
+    }
+
+    public User getUserById(Long postId) {
+//        log.debug("Retrieving post with ID: {}", postId);
+
+//        Long userId = UserContextHolder.getCurrentUserId();
+
+//        List<PersonDto> firstConnections = connectionsClient.getFirstConnections();
+
+//        TODO send Notifications to all connections
+
+        User user = userRepository.findById(postId).orElseThrow(() ->
+                new ResourceNotFoundException(" Post not found withid: "+postId));
+        return user;
     }
 
 }

@@ -29,6 +29,7 @@ public class PostsService {
     private final ModelMapper modelMapper;
     private final UserRepository userRepository;
     private final NotifierManager observerManager;
+    private final AuthService authService;
 
     public PostDto createPost(PostCreateRequestDto postDto, Long userId) {
         Post post = modelMapper.map(postDto, Post.class);
@@ -40,7 +41,9 @@ public class PostsService {
         ArrayList<ConnectionFollowerResponseDto> connectionFollowersList = (ArrayList<ConnectionFollowerResponseDto>) getFollowerPost(postDto.getUserId());
         ArrayList<UserDto> followerUserIdList= new ArrayList<>();
 
-        String notification = "User " + postDto.getUserId() + " posted: " + postDto.getContent();
+        User user=authService.getUserById(userId);
+
+        String notification = "User " + user.getName() + " posted: " + postDto.getContent();
 
         for (ConnectionFollowerResponseDto connectionFollowerResponseDto : connectionFollowersList) {
             followerUserIdList.add(connectionFollowerResponseDto.getUser());
