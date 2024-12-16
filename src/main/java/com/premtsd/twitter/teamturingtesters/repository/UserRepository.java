@@ -18,7 +18,7 @@ public interface UserRepository extends JpaRepository<User, Long> {
             " FROM users u WHERE u.id = :id", nativeQuery = true)
     Optional<UserWithFollowerCountsProjection> findUserWithFollowerCounts(@Param("id") Long id);
 
-    @Query(value = "select u.* from user_followers f join users u on f.user_id=u.id where user_id=:id", nativeQuery = true)
+    @Query(value = "select u.* from user_followers f join users u on f.follower_id=u.id where f.user_id=:id", nativeQuery = true)
     List<User> findUserByFollowerId(Long id);
 
 }
