@@ -23,18 +23,18 @@ This repository contains the source code for a **Twitter Clone Application** dev
     - Inter-service communication using REST APIs.
 
 5. **Best Practices**:
-    - Follows **SOLID Principles** and incorporates **Design Patterns** like Strategy and Factory.
+    - Follows **SOLID Principles** and incorporates **Design Patterns**.
     - Centralized exception handling.
 
 6. **Database**:
-    - Relational Database integration (e.g., MySQL/PostgreSQL).
+    - Relational Database integration (e.g.,PostgreSQL).
     - JPA/Hibernate for ORM.
 
 ## Technologies Used
 
 - **Backend**: Spring Boot, Spring Data JPA, Hibernate.
 - **Authentication**: JWT (JSON Web Token).
-- **Database**: MySQL/PostgreSQL.
+- **Database**: PostgreSQL.
 - **Dependency Management**: Maven.
 - **Design Principles**: SOLID, Design Patterns.
 
@@ -87,10 +87,6 @@ src/
 1. Add WebSocket support for real-time notifications.
 2. Implement Docker and Kubernetes for containerization and orchestration.
 3. Expand to a fully scalable microservices architecture.
-
-## Contributing
-
-Feel free to fork this repository and contribute via pull requests. For major changes, please open an issue first to discuss what you would like to change.
 
 ## License
 
