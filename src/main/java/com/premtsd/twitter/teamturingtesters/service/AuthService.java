@@ -150,5 +150,12 @@ public class AuthService {
         return user;
     }
 
+    public List<UserDto> getFollowerUsers(Long userId) {
+        List<User> userList = userRepository.findUserByFollowerId(userId);
+        List<UserDto> userDtoList = userList.stream().map(user -> mapUserToUserDto(user)).collect(Collectors.toList());
+        System.out.println(userDtoList);
+        return userDtoList;
+    }
+
 }
 

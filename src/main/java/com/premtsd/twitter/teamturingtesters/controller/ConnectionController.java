@@ -21,7 +21,7 @@ public class ConnectionController {
 
     @PostMapping("/follow")
     public ResponseEntity<Void> followUser(@RequestBody ConnectionRequestDto connectionRequestDto) {
-        connectionService.follow(connectionRequestDto.getUserId2(),connectionRequestDto.getUserId1());
+        connectionService.follow(connectionRequestDto.getUserId1(),connectionRequestDto.getUserId2());
         return new ResponseEntity<>(null, HttpStatus.CREATED);
     }
 

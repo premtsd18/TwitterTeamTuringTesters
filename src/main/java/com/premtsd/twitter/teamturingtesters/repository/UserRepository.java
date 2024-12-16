@@ -6,6 +6,7 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 
+import java.util.List;
 import java.util.Optional;
 
 public interface UserRepository extends JpaRepository<User, Long> {
@@ -16,5 +17,8 @@ public interface UserRepository extends JpaRepository<User, Long> {
             " (SELECT COUNT(1) FROM user_followers WHERE follower_id = :id) AS followingCount " +
             " FROM users u WHERE u.id = :id", nativeQuery = true)
     Optional<UserWithFollowerCountsProjection> findUserWithFollowerCounts(@Param("id") Long id);
+
+    @Query(value = "select u.* from user_followers f join users u on f.user_id=u.id where user_id=:id", nativeQuery = true)
+    List<User> findUserByFollowerId(Long id);
 
 }

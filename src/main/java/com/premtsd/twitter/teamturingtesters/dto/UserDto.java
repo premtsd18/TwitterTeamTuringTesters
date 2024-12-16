@@ -12,4 +12,5 @@ public class UserDto {
     private String email;
     private List<String> roles;
     private Set<UserDto> followerList;
+    private Set<UserDto> followingList;
 }

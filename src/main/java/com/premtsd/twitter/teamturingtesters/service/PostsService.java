@@ -38,17 +38,16 @@ public class PostsService {
 
         post.setId(null);
         Post savedPost = postsRepository.save(post);
-        ArrayList<ConnectionFollowerResponseDto> connectionFollowersList = (ArrayList<ConnectionFollowerResponseDto>) getFollowerPost(postDto.getUserId());
-        ArrayList<UserDto> followerUserIdList= new ArrayList<>();
+        ArrayList<UserDto> userFollowersList = (ArrayList<UserDto>) authService.getFollowerUsers(postDto.getUserId());
 
         User user=authService.getUserById(userId);
 
+
         String notification = "User " + user.getName() + " posted: " + postDto.getContent();
 
-        for (ConnectionFollowerResponseDto connectionFollowerResponseDto : connectionFollowersList) {
-            followerUserIdList.add(connectionFollowerResponseDto.getUser());
+        for (UserDto userDto : userFollowersList) {
             for(Notifier observer:observerManager.getObservers()) {
-                observer.notify(connectionFollowerResponseDto.getUser(),notification);
+                observer.notify(userDto,notification);
             }
         }
         // Create a notification message
@@ -81,6 +80,8 @@ public class PostsService {
             .map((element) -> modelMapper.map(element, PostDto.class))
             .collect(Collectors.toList());
     }
+
+
 
     public List<ConnectionFollowerResponseDto> getFollowerPost(Long userId) throws ResourceNotFoundException {
         Optional<User> user = userRepository.findById(userId);
