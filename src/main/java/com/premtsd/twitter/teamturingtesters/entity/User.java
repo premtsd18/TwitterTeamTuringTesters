@@ -48,5 +48,5 @@ public class User {
             joinColumns = @JoinColumn(name = "user_id"),
             inverseJoinColumns = @JoinColumn(name = "follower_id")
     )
-    private Set<User> followerList = new HashSet<>();;
+    private Set<User> followerList = new HashSet<>();
 }

@@ -71,6 +71,15 @@ public class ConnectionService {
             connectionFollowerResponseDto.setPosts((ArrayList<PostDto>) postDtoList);
             connectionFollowerResponseDtoList.add(connectionFollowerResponseDto);
         }
+
+        ConnectionFollowerResponseDto connectionFollowerResponseDto = new ConnectionFollowerResponseDto();
+//            System.out.println(user.getClass());
+        connectionFollowerResponseDto.setUser(mapUserToUserDto(currUser));
+        postsService.getAllPostsOfUser(currUser.getId());
+        List<PostDto> postDtoList =  postsService.getAllPostsOfUser(currUser.getId());
+        connectionFollowerResponseDto.setPosts((ArrayList<PostDto>) postDtoList);
+        connectionFollowerResponseDtoList.add(connectionFollowerResponseDto);
+
         return connectionFollowerResponseDtoList;
     }
 

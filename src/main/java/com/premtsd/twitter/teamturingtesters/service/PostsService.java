@@ -83,6 +83,7 @@ public class PostsService {
         Optional<User> user = userRepository.findById(userId);
         if(user.isEmpty()) throw  new ResourceNotFoundException("User not found with id - "+userId);
         ArrayList<ConnectionFollowerResponseDto> connectionFollowerResponseDtoList= mapFollowerAndPosts(user.get());
+
         return connectionFollowerResponseDtoList;
     }
 
@@ -97,6 +98,7 @@ public class PostsService {
             connectionFollowerResponseDto.setPosts((ArrayList<PostDto>) postDtoList);
             connectionFollowerResponseDtoList.add(connectionFollowerResponseDto);
         }
+
         return connectionFollowerResponseDtoList;
     }
 
