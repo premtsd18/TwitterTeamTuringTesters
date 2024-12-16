@@ -33,13 +33,14 @@ public class ConnectionService {
     private final PostsService postsService;
 
     public void follow(long userId1,long userId2) {
+
         if(userId1==userId2) throw new BadRequestException("Self follow not Allowed");
 
         User user1 = userRepository.findById(userId1).orElseThrow(() ->
-                new ResourceNotFoundException("Post not found with id: "+userId1));
+                new ResourceNotFoundException("User not found with id: "+userId1));
 
         User user2 = userRepository.findById(userId2).orElseThrow(() ->
-                new ResourceNotFoundException("Post not found with id: "+userId2));
+                new ResourceNotFoundException("User not found with id: "+userId2));
 
         if(user1.getFollowerList().contains(user2)){
             user1.getFollowerList().remove(user2);

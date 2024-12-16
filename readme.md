@@ -1,4 +1,4 @@
-# Twitter Clone Microservices Project
+# TuringX Java Project
 
 This repository contains the source code for a **Twitter Clone Application** developed using **Spring Boot** and **Microservices Architecture**. The project includes core features like user registration, authentication, posting tweets, following users, and managing roles and permissions.
 
@@ -46,7 +46,6 @@ This repository contains the source code for a **Twitter Clone Application** dev
 |-------------|------------------|----------------------------------|
 | `POST`      | `/follow`        | Follow a user                    |
 | `GET`       | `/getAllPosts`   | Fetch posts in user connections  |
-| `REQUEST`   | `/connection`    | Connection-related operations    |
 
 ## Configuration Setup
 
@@ -94,8 +93,8 @@ client.id=ccloud-springboot-client-d307d509-09c7-4e42-95b9-b9ac281a080c
 ### Steps to Run
 1. Clone the repository:
    ```bash
-   git clone https://github.com/your-repository/twitter-clone.git
-   cd twitter-clone
+   git clone https://github.com/premtsd18/TwitterTeamTuringTesters
+   cd TwitterTeamTuringTesters
    ```
 
 2. Update the `application.properties` file with your database and Kafka credentials.

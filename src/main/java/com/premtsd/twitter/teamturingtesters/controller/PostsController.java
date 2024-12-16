@@ -28,7 +28,9 @@ public class PostsController {
 
     @PostMapping
     public ResponseEntity<PostDto> createPost(@RequestBody PostCreateRequestDto postDto) {
-        if(postDto.getContent().length()>=250) throw new BadRequestException("Content is soooo huge");
+        if(postDto.getContent().length()>=250)
+            throw new BadRequestException("Content is soooo huge");
+
         PostDto createdPost;
             createdPost = postsService.createPost(postDto, postDto.getUserId());
 
