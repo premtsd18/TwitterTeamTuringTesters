@@ -107,7 +107,8 @@ client.id=ccloud-springboot-client-d307d509-09c7-4e42-95b9-b9ac281a080c
    ```
 
 4. Access the application:
-   - API Base URL: `http://localhost:7799/`
+   - API Base URL: `http://localhost:7799`
+   - API Cloud URL: `https://twitter-team-turning-testers-19648cf420b7.herokuapp.com`
 
 ## Future Enhancements
 1. Add WebSocket support for real-time notifications.
